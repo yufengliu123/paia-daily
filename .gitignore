@@ -1,5 +1,5 @@
 .env
-output/
+output/*.tmp
 .cache/
 __pycache__/
 *.pyc

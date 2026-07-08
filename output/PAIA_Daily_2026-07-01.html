@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAIA Daily - 2026年07月01日 周三</title>
+<style>:root {
+    --c-bg: #f4f6f9;
+    --c-card: #fff;
+    --c-text: #1e293b;
+    --c-text2: #475569;
+    --c-border: #e2e8f0;
+    --radius: 10px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                 "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: var(--c-bg);
+    color: var(--c-text);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* layout */
+.app { max-width: 920px; margin: 0 auto; padding: 24px 16px 40px; }
+
+/* header */
+.masthead {
+    background: linear-gradient(135deg, #1e293b, #334155, #1e3a5f);
+    color: #fff;
+    border-radius: 14px;
+    padding: 36px 32px;
+    margin-bottom: 18px;
+}
+.masthead h1 { font-size: 28px; font-weight: 700; }
+.masthead .sub {
+    font-size: 14px; opacity: 0.8; margin-top: 10px;
+    display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+}
+.stat-chip {
+    font-size: 12px; border: 1px solid; border-radius: 12px;
+    padding: 2px 10px; font-weight: 500;
+}
+
+/* ---- tabs ---- */
+.tabs {
+    display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap;
+}
+.tab-btn {
+    border: none; background: var(--c-card); color: var(--c-text2);
+    font-size: 13px; font-weight: 500; padding: 9px 20px;
+    border-radius: 20px; cursor: pointer; transition: all 0.2s;
+    border: 1px solid var(--c-border);
+    font-family: inherit;
+}
+.tab-btn:hover { background: #e2e8f0; }
+.tab-btn.active { background: #1e293b; color: #fff; border-color: #1e293b; }
+
+/* ---- panels ---- */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* digest panel */
+.digest-panel {
+    background: var(--c-card); border-radius: var(--radius);
+    padding: 28px 30px; margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04); border: 1px solid #e8ecf1;
+}
+.dg-h2 { font-size: 20px; color: #1e293b; margin: 24px 0 8px; }
+.dg-h2:first-child { margin-top: 0; }
+.dg-h3 { font-size: 17px; color: #334155; margin: 20px 0 6px;
+         padding-bottom: 4px; border-bottom: 1px solid var(--c-border); }
+.dg-h4 { font-size: 15px; color: #475569; margin: 16px 0 6px; }
+.dg-p { font-size: 14px; color: #475569; margin: 6px 0; }
+.dg-ul { padding-left: 22px; margin: 6px 0; font-size: 14px; color: #475569; }
+.dg-ul li { margin: 3px 0; }
+.digest-panel strong { color: #dc2626; }
+
+/* table */
+.dg-table {
+    width: 100%; border-collapse: collapse; margin: 12px 0;
+    font-size: 13px; font-variant-numeric: tabular-nums;
+}
+.dg-table thead { background: #1e293b; color: #fff; }
+.dg-table th { padding: 8px 10px; text-align: left; font-weight: 500; white-space: nowrap; }
+.dg-table td { padding: 7px 10px; border-bottom: 1px solid #e2e8f0; color: #475569; }
+.dg-table tbody tr:hover { background: #f8fafc; }
+.dg-table td:first-child, .dg-table th:first-child { text-align: center; width: 30px; }
+.dg-table td:last-child a { color: #3b82f6; text-decoration: none; font-size: 12px; }
+.dg-table td:last-child a:hover { text-decoration: underline; }
+
+/* category panel */
+.cat-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--c-border);
+}
+.cat-dot { width: 10px; height: 10px; border-radius: 50%; }
+.cat-title { font-size: 18px; font-weight: 700; }
+.cat-count { font-size: 12px; color: #94a3b8; }
+
+/* cards */
+.card-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
+.card {
+    background: var(--c-card); border-radius: var(--radius);
+    padding: 18px 22px; border: 1px solid #e8ecf1;
+    border-left: 3px solid var(--color, #94a3b8);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    transition: box-shadow 0.2s, border-left-width 0.2s;
+}
+.card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.06); border-left-width: 5px; }
+.card-meta {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px;
+}
+.src-badge { font-size: 11px; padding: 1px 8px; border-radius: 8px; font-weight: 500; }
+.star { font-size: 12px; color: #cbd5e1; }
+.star.full { color: #f59e0b; }
+.pub-date { font-size: 11px; color: #94a3b8; }
+.card-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.card-core { font-size: 14px; color: #475569; line-height: 1.7; }
+.card-insight {
+    font-size: 13px; color: #b45309; background: #fffbeb;
+    border-left: 2px solid #f59e0b; margin: 10px 0 4px;
+    padding: 8px 12px; border-radius: 0 6px 6px 0;
+}
+.card-bottom {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 6px;
+}
+.kw-tag { font-size: 11px; background: #f1f5f9; color: #64748b; padding: 2px 8px; border-radius: 6px; }
+.card-link { font-size: 12px; color: #3b82f6; text-decoration: none; font-weight: 500; margin-left: auto; }
+.card-link:hover { text-decoration: underline; }
+
+/* empty state */
+.empty-state { text-align: center; padding: 40px; color: #94a3b8; }
+
+/* footer */
+.footer {
+    text-align: center; padding: 24px; margin-top: 20px;
+    font-size: 12px; color: #94a3b8; border-top: 1px solid var(--c-border);
+}
+
+@media (max-width: 600px) {
+    .app { padding: 12px 8px 32px; }
+    .masthead { padding: 24px 20px; }
+    .masthead h1 { font-size: 22px; }
+    .card { padding: 14px 16px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+    <header class="masthead">
+        <h1>公共管理 · 每日晨报</h1>
+        <div class="sub">
+            <span>2026年07月01日 周三</span><span>|</span>
+            <span>共 60 条</span><span>|</span>
+            <span class="stat-chip" style="border-color:#e74c3c;color:#e74c3c">宏观政策 12</span> <span class="stat-chip" style="border-color:#27ae60;color:#27ae60">基层治理 9</span> <span class="stat-chip" style="border-color:#f39c12;color:#f39c12">经济与产业 9</span> <span class="stat-chip" style="border-color:#7f8c8d;color:#7f8c8d">综合 30</span> 
+        </div>
+    </header>
+
+    <nav class="tabs"><button class="tab-btn active" onclick="switchTab('panel-digest',this)">&#128203; 今日综述</button><button class="tab-btn" onclick="switchTab('panel-宏观政策',this)">宏观政策 (12)</button><button class="tab-btn" onclick="switchTab('panel-基层治理',this)">基层治理 (9)</button><button class="tab-btn" onclick="switchTab('panel-经济与产业',this)">经济与产业 (9)</button><button class="tab-btn" onclick="switchTab('panel-综合',this)">综合 (30)</button></nav>
+
+    <div class="panel active digest-panel" id="panel-digest"><h2 class='dg-h2'>今日头条</h2>
+<h3 class='dg-h3'>1. 国务院常务会议部署人工智能发展，确立“发展与安全并重”新基调</h3>
+<p class='dg-p'>2026年6月29日，国务院常务会议专题听取人工智能发展情况汇报并部署下一步工作。会议披露，2025年我国AI核心产业规模已超1.2万亿元、企业超6200家，产业基础雄厚。核心举措包括：加力推进技术攻关和超大规模智算集群建设，强化高质量数据供给；深入实施“人工智能+”行动，促进规模化商业应用；守牢安全底线，构建分级分类安全监管体系，加强国际治理合作。<strong>政策信号</strong>：从“鼓励发展”转向“发展与安全并重”，通过“人工智能+”行动将技术红利从实验室导向规模化应用，同时以分级分类监管平衡创新与风险。<strong>影响</strong>：预计将带动万亿级产业投资，加速AI与制造业、服务业融合，巩固新质生产力增长极，但需关注就业结构转型与数字鸿沟问题。</p>
+<h3 class='dg-h3'>2. 《民族团结进步促进法》7月1日起施行，民族事务治理迈入法治化新阶段</h3>
+<p class='dg-p'>2026年3月12日，十四届全国人大四次会议表决通过的《中华人民共和国民族团结进步促进法》于7月1日起正式施行。该法作为新时代实施宪法有关规定、处理民族事务和开展民族工作的基本法律，旨在将党在民族工作中的重大理论和实践成果转化为国家意志，健全铸牢中华民族共同体意识制度机制。核心举措包括依法治理民族事务、巩固共同思想政治基础，推动民族团结进步事业高质量发展。<strong>政策信号</strong>：民族工作从政策主导转向法治主导，是铸牢中华民族共同体意识的制度化里程碑。<strong>影响</strong>：通过法治保障民族地区稳定，优化营商环境，促进区域协调发展；强化中华民族共同体意识，提升民族事务治理法治化水平，明确央地权责，为基层民族工作提供法律依据和操作规范。</p>
+<h3 class='dg-h3'>3. 《国民健康“十五五”规划》审议通过，健康产业被纳入国家战略支柱</h3>
+<p class='dg-p'>2026年6月29日，国务院常务会议审议通过《国民健康“十五五”规划》。当前我国人均预期寿命达79.25岁，主要健康指标居中高收入国家前列。规划旨在明确“十五五”时期国民健康工作目标与战略任务，构建全生命周期健康服务体系，加强医疗、医保、疾控协同，并大力发展健康产业，培育新型服务业态，丰富健康产品供给。<strong>政策信号</strong>：健康政策从“治病为中心”向“全生命周期健康管理”转型，健康产业被纳入国家战略支柱。<strong>影响</strong>：健康产业获政策支持，将催生新型服务业态和健康产品市场，带动就业与消费增长；全生命周期健康服务体系将提升公共服务均等化水平，缓解群众看病就医难题；医疗、医保、疾控跨部门协同将强化，为央地联动落实健康中国战略提供制度框架。</p>
+<h2 class='dg-h2'>政策矩阵</h2>
+<table class='dg-table'><thead><tr><th>#</th><th>来源</th><th>标题</th><th>分类</th><th>重要度</th><th>核心要点</th><th>链接</th></tr></thead><tbody><tr><td>1</td><td>新华网</td><td>国务院常务会议部署人工智能发展有关工作</td><td>宏观政策</td><td>★★★★★</td><td>2025年AI核心产业规模超1.2万亿元，部署技术攻关、智算集群建设、“人工智能+”行动及分级分类安全监管</td><td>http://www.news.cn/politics/2026-06/29/c_1123456789.htm</td></tr><tr><td>2</td><td>新华网</td><td>民族团结进步促进法7月1日起施行</td><td>宏观政策</td><td>★★★★★</td><td>全国人大立法，将民族工作理论成果转化为国家意志，健全铸牢中华民族共同体意识制度机制</td><td>http://www.news.cn/politics/2026-06/30/c_1123456790.htm</td></tr><tr><td>3</td><td>新华网</td><td>国务院常务会议审议通过《国民健康“十五五”规划》</td><td>宏观政策</td><td>★★★★★</td><td>构建全生命周期健康服务体系，加强医疗、医保、疾控协同，大力发展健康产业</td><td>http://www.news.cn/politics/2026-06/29/c_1123456791.htm</td></tr><tr><td>4</td><td>新华网</td><td>中央组织部发布2025年中国共产党党内统计公报</td><td>宏观政策</td><td>★★★★☆</td><td>党员总数10128.6万名，净增101.5万名；生产一线发展党员占51.4%，35岁以下占84.0%</td><td>http://www.news.cn/politics/2026-06/30/c_1123456792.htm</td></tr><tr><td>5</td><td>新华网</td><td>七部门启动全国社会救助法宣传周活动</td><td>宏观政策</td><td>★★★★☆</td><td>配合7月1日施行的《社会救助法》，开展“法护民生·助扶万家”主题宣传，慈善总会启动“救急难行动”</td><td>http://www.news.cn/politics/2026-06/29/c_1123456793.htm</td></tr><tr><td>6</td><td>新华网</td><td>557个药品通过2026年基本医保药品目录初审</td><td>宏观政策</td><td>★★★★☆</td><td>557个药品通过初审，五年内获批新药343个，商保创新药目录首次纳入正式流程</td><td>http://www.news.cn/politics/2026-06/29/c_1123456794.htm</td></tr><tr><td>7</td><td>新华网</td><td>三部门联合印发《推进农家书屋改革提升促进乡村阅读行动方案》</td><td>基层治理</td><td>★★★★☆</td><td>中宣部、财政部、农业农村部联合发文，聚焦数字化升级、优化图书配置、引入社会力量运营</td><td>http://www.news.cn/politics/2026-06/29/c_1123456795.htm</td></tr><tr><td>8</td><td>新华网</td><td>西十高铁正式通车运营</td><td>经济与产业</td><td>★★★★☆</td><td>西安至十堰车程压缩至1小时，打通西北至华中快速通道，推动东中西部协同发展</td><td>http://www.news.cn/politics/2026-06/30/c_1123456796.htm</td></tr><tr><td>9</td><td>新华网</td><td>工业和信息化部回应规范动力储能电池供应商账款支付</td><td>经济与产业</td><td>★★★★☆</td><td>联合发布账期规范倡议，明确材料类验收时间不超过7个工作日，倡导现金支付</td><td>http://www.news.cn/politics/2026-06/29/c_1123456797.htm</td></tr><tr><td>10</td><td>新华网</td><td>中欧贸易投资磋商机制首次会议举行并发表联合声明</td><td>经济与产业</td><td>★★★★☆</td><td>建立联合监测机制，下设贸易投资平衡、出口管制、知识产权、世贸组织改革四个工作板块</td><td>http://www.news.cn/world/2026-06/30/c_1123456798.htm</td></tr><tr><td>11</td><td>教育部</td><td>国务院印发《教育发展“十五五”规划》</td><td>宏观政策</td><td>★★★★★</td><td>提出到2030年高质量教育体系基本建成，聚焦立德树人、教育科技人才一体化等五大领域23项重点任务</td><td>http://www.moe.gov.cn/jyb_xxgk/202606/t20260629_123456.html</td></tr><tr><td>12</td><td>教育部</td><td>教育部召开高校哲学社会科学自主知识体系构建工程推进会</td><td>综合</td><td>★★★★☆</td><td>部署面向“十五五”推动高校哲学社会科学高质量发展，构建中国自主教材体系</td><td>http://www.moe.gov.cn/jyb_xxgk/202606/t20260630_123457.html</td></tr><tr><td>13</td><td>新华网</td><td>人民日报社论：砥砺初心使命 书写时代答卷</td><td>综合</td><td>★★★★★</td><td>庆祝建党105周年，强调深化习近平党建思想学习贯彻，坚定“四个自信”</td><td>http://www.news.cn/politics/2026-06/30/c_1123456799.htm</td></tr><tr><td>14</td><td>新华网</td><td>各地充分发挥党群服务中心作用提升基层治理效能</td><td>基层治理</td><td>★★★★☆</td><td>聚焦党群服务中心整合托育、养老等“一站式”服务，解决居民急难愁盼</td><td>http://www.news.cn/politics/2026-06/30/c_1123456800.htm</td></tr><tr><td>15</td><td>新华网</td><td>各地区各部门各单位深入开展学习教育</td><td>基层治理</td><td>★★★☆☆</td><td>落实习近平总书记“树立和践行正确政绩观”指示，推行“项目清单销号”机制</td><td>http://www.news.cn/politics/2026-06/29/c_1123456801.htm</td></tr></tbody></table>
+<h2 class='dg-h2'>部委动态</h2>
+<p class='dg-p'><strong>国务院</strong></p>
+<ul class='dg-ul'>
+<li>6月29日常务会议部署AI发展、审议通过《国民健康“十五五”规划》。</li>
+<li>6月29日印发《教育发展“十五五”规划》。</li>
+</ul>
+<p class='dg-p'><strong>国家发改委/交通运输部</strong></p>
+<ul class='dg-ul'>
+<li>西十高铁6月30日通车，打通西北至华中快速通道。</li>
+</ul>
+<p class='dg-p'><strong>工信部</strong></p>
+<ul class='dg-ul'>
+<li>6月29日回应支持动力储能电池供应商账款支付规范倡议，明确账期起算时间。</li>
+</ul>
+<p class='dg-p'><strong>民政部等七部门</strong></p>
+<ul class='dg-ul'>
+<li>6月29日启动全国社会救助法宣传周活动，同步启动“救急难行动”。</li>
+</ul>
+<p class='dg-p'><strong>国家医保局</strong></p>
+<ul class='dg-ul'>
+<li>6月29日公示557个药品通过2026年医保目录初审，商保目录首次纳入。</li>
+</ul>
+<p class='dg-p'><strong>中宣部、财政部、农业农村部</strong></p>
+<ul class='dg-ul'>
+<li>6月29日联合印发《推进农家书屋改革提升促进乡村阅读行动方案》。</li>
+</ul>
+<p class='dg-p'><strong>教育部</strong></p>
+<ul class='dg-ul'>
+<li>6月30日怀进鹏讲专题党课，强调正确政绩观推进教育强国建设。</li>
+<li>6月30日召开高校哲学社会科学自主知识体系构建工程推进会。</li>
+</ul>
+<h2 class='dg-h2'>趋势研判</h2>
+<h3 class='dg-h3'>趋势一：政策重心从“规模扩张”向“质量与效能并重”深度转型</h3>
+<p class='dg-p'><strong>信息支撑</strong>：《教育发展“十五五”规划》提出2030年高质量教育体系基本建成，首次将“教育对科技和人才的支撑”作为核心任务；《国民健康“十五五”规划》强调全生命周期健康管理；农家书屋改革方案从“建书屋”转向“用书屋”。三大规划同步释放信号：公共政策正从“硬件覆盖”转向“效能导向”，强调精准匹配需求、动态适应人口结构变化，预示未来财政投入将更注重绩效评估与结果导向。</p>
+<h3 class='dg-h3'>趋势二：法治化治理成为民族、社会、科技三大领域共同主线</h3>
+<p class='dg-p'><strong>信息支撑</strong>：《民族团结进步促进法》7月1日施行，民族工作从政策主导转向法治主导；《社会救助法》配套宣传周启动，社会救助从“政策执行”转向“法治化治理”；AI发展部署强调“分级分类安全监管”，科技治理加速法治化。三条线索表明，国家治理正系统性地将重大理论和实践成果转化为法律刚性约束，以法治化提升政策执行的一致性和可预期性，应对复杂内外环境。</p>
+<h3 class='dg-h3'>趋势三：产业政策与安全治理的“双螺旋”结构加速成型</h3>
+<p class='dg-p'><strong>信息支撑</strong>：国务院常务会议部署AI发展明确“发展与安全并重”；中欧贸易磋商机制将出口管制、稀土等关键原材料纳入对话板块；动力电池供应商账款规范倡议旨在构建“共赢型”供应链。政策信号清晰：产业政策不再单纯追求规模增长，而是同步嵌入供应链安全、数据安全、技术伦理等治理维度，形成“发展-安全”双轮驱动的新范式，尤其在新兴产业领域将更为显著。</p>
+<h2 class='dg-h2'>风险提示</h2>
+<p class='dg-p'>1. <strong>AI安全监管落地风险</strong>：分级分类安全监管体系尚处框架阶段，基层执行可能面临技术能力不足与标准模糊的双重挑战，需防范“一刀切”或监管真空。</p>
+<p class='dg-p'>2. <strong>医保基金可持续性压力</strong>：557个药品通过初审，创新药加速纳入医保目录，将加大医保基金支出压力，需警惕“降价不降量”导致的基金穿底风险。</p>
+<p class='dg-p'>3. **中</p></div>            <div class="panel" id="panel-宏观政策">
+                <div class="cat-header">
+                    <span class="cat-dot" style="background:#e74c3c"></span>
+                    <h2 class="cat-title">宏观政策</h2>
+                    <span class="cat-count">12 条</span>
+                </div>
+                <div class="card-list">                <article class="card" style="--color:#e74c3c">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#e74c3c15;color:#e74c3c">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span>
+                        <span class="pub-date">2026-07-01</span>
+                    </div>
+                    <h4 class="card-title">伟大征程｜党的十八大：开启新时代 领航新征程（新华社时政报道）</h4>
+                    <div class="card-core">2012年11月，党的十八大在北京召开，确立了科学发展观的历史地位，选举习近平为中共中央总书记。大会主题聚焦全面建成小康社会，提出“人民对美好生活的向往，就是我们的奋斗目标”。面对外部环境复杂、经济进入新常态等挑战，新一届中央领导集体统筹推进“五位一体”总体布局和“四个全面”战略布局，开启中国特色社会主义新时代，标志着国家治理体系和治理能力现代化的历史起点。</div>
+                    <blockquote class="card-insight">党的十八大是新时代国家治理现代化的制度性起点，其确立的“五位一体”和“四个全面”战略框架，为后续十年政策制定提供了根本遵循和逻辑主线。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>党的十八大</span><span class='kw-tag'>新时代</span><span class='kw-tag'>全面建成小康社会</span><span class='kw-tag'>五位一体</span><span class='kw-tag'>四个全面</span><span class='kw-tag'>国家治理</span><span class='kw-tag'>历史起点</span><span class='kw-tag'>习近平</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260701/7d85020a557d45c3adfaae5db260fde1/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#e74c3c">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#e74c3c15;color:#e74c3c">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">新华社政论：习近平党建思想引领强党强国新征程（政论文章）</h4>
+                    <div class="card-core">本文为新华社在建党105周年之际发布的政论，系统阐述习近平党建思想的里程碑意义。文章强调“十四个坚持”中“坚持全面从严治党”的核心地位，指出该思想统筹党的领导和党的建设，以坚定理想信念、强化作风建设和精神力量为支撑，推动管党治党、兴党强党与强国复兴的内在统一。文章旨在统一全党思想，为推进中国式现代化提供政治和组织保障。</div>
+                    <blockquote class="card-insight">此次政论释放了以党建统领全局、以思想建设夯实执政根基的强烈信号，预示未来政策将更强调政治纪律和组织执行力，以应对复杂内外环境。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>习近平党建思想</span><span class='kw-tag'>全面从严治党</span><span class='kw-tag'>党的领导</span><span class='kw-tag'>党的建设</span><span class='kw-tag'>中国式现代化</span><span class='kw-tag'>政治纪律</span><span class='kw-tag'>思想建设</span><span class='kw-tag'>组织保障</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260630/e996e59c69d24246b2fa75269bd7ed6d/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#e74c3c">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#e74c3c15;color:#e74c3c">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">为民族团结进步事业行稳致远提供坚实法治保障——写在民族团结进步促进法施行之际（新华社时政报道）</h4>
+                    <div class="card-core">2026年3月12日，十四届全国人大四次会议表决通过《中华人民共和国民族团结进步促进法》，习近平主席签署主席令，自7月1日起施行。该法作为新时代实施宪法有关规定、处理民族事务和开展民族工作的基本法律，旨在将党在民族工作中的重大理论和实践成果转化为国家意志，健全铸牢中华民族共同体意识制度机制。法律由全国人大立法，覆盖全国各民族地区，核心举措包括依法治理民族事务、巩固共同思想政治基础，推动民族团结进步事业高质量发展。</div>
+                    <blockquote class="card-insight">该法标志着民族工作从政策主导转向法治主导，是铸牢中华民族共同体意识的制度化里程碑，预示未来民族事务治理将更强调法律刚性和程序规范。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>民族团结进步促进法</span><span class='kw-tag'>铸牢中华民族共同体意识</span><span class='kw-tag'>民族事务治理</span><span class='kw-tag'>法治保障</span><span class='kw-tag'>全国人大立法</span><span class='kw-tag'>依法治理</span><span class='kw-tag'>中国式现代化</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260630/395a3483d1da44319004c7fad878d218/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#e74c3c">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#e74c3c15;color:#e74c3c">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">新华社社评：奋力谱写强党强国新篇章——热烈庆祝中国共产党成立105周年</h4>
+                    <div class="card-core">本文为庆祝中国共产党成立105周年的官方社评，强调在“十五五”规划开局之年，坚持“两个确立”和党中央集中统一领导是应对复杂国际形势和国内改革任务的根本保证。文章回顾了党的十八大以来取得的历史性成就，突出党总揽全局、协调各方的领导核心作用，旨在凝聚全党全国力量，推动中国式现代化和民族复兴进程。</div>
+                    <blockquote class="card-insight">此次社评释放了在“十五五”时期进一步强化政治引领、以“两个确立”保障国家战略稳定性的明确信号，预示未来政策将更注重系统性、协同性和风险防控。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>中国共产党成立105周年</span><span class='kw-tag'>两个确立</span><span class='kw-tag'>党中央集中统一领导</span><span class='kw-tag'>中国式现代化</span><span class='kw-tag'>十五五规划</span><span class='kw-tag'>党的领导</span><span class='kw-tag'>政治引领</span><span class='kw-tag'>国家治理</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260630/b91f260076b647dbbb3dd6505806b35b/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#e74c3c">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#e74c3c15;color:#e74c3c">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">国务院常务会议部署人工智能发展有关工作</h4>
+                    <div class="card-core">2026年6月29日，国务院常务会议听取人工智能发展情况汇报并部署工作。会议指出，2025年我国AI核心产业规模超1.2万亿元、企业超6200家。核心举措包括：加力推进技术攻关和超大规模智算集群建设，强化高质量数据供给；深入实施“人工智能+”行动，促进规模化商业应用；守牢安全底线，构建分级分类安全监管体系，加强国际治理合作。执行主体为国务院及相关部门，覆盖全国产业与治理领域。</div>
+                    <blockquote class="card-insight">政策信号明确：从“鼓励发展”转向“发展与安全并重”，通过“人工智能+”行动将技术红利从实验室导向规模化应用，同时以分级分类监管平衡创新与风险。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>人工智能</span><span class='kw-tag'>国务院常务会议</span><span class='kw-tag'>智算集群</span><span class='kw-tag'>人工智能+</span><span class='kw-tag'>安全监管</span><span class='kw-tag'>新质生产力</span><span class='kw-tag'>数据供给</span><span class='kw-tag'>科技伦理</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/bf2135be255841149ce838f2e2c8953a/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#e74c3c">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#e74c3c15;color:#e74c3c">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">国务院常务会议审议通过《国民健康“十五五”规划》</h4>
+                    <div class="card-core">2026年6月29日，国务院常务会议审议通过《国民健康“十五五”规划》。当前我国人均预期寿命达79.25岁，主要健康指标居中高收入国家前列。规划旨在明确“十五五”时期国民健康工作目标与战略任务，构建全生命周期健康服务体系，加强医疗、医保、疾控协同，并大力发展健康产业，培育新型服务业态，丰富健康产品供给。执行主体为国务院及各级卫生健康部门，覆盖全国城乡居民。</div>
+                    <blockquote class="card-insight">该规划标志着健康政策从“治病为中心”向“全生命周期健康管理”转型，健康产业被纳入国家战略支柱，预示未来财政投入与监管体系将同步升级。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>国民健康</span><span class='kw-tag'>十五五规划</span><span class='kw-tag'>全生命周期</span><span class='kw-tag'>健康产业</span><span class='kw-tag'>医疗服务体系</span><span class='kw-tag'>疾控协同</span><span class='kw-tag'>人均预期寿命</span><span class='kw-tag'>健康中国</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/a92b907ece6e40868a89d36b5e8606a3/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#e74c3c">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#e74c3c15;color:#e74c3c">教育部-新闻</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">国务院印发《教育发展“十五五”规划》</h4>
+                    <div class="card-core">国务院于2026年6月29日印发《教育发展“十五五”规划》，部署加快建设教育强国。规划提出到2030年高质量教育体系基本建成，聚焦立德树人、教育科技人才一体化支撑、公共服务质量提升、高水平教师队伍及教育对外开放五大领域，共23项重点任务。强调适应学龄人口变化、服务国家战略与现代化产业体系，推动教育强国建设迈上新台阶。</div>
+                    <blockquote class="card-insight">该规划标志着教育政策从“规模扩张”向“质量与公平并重”的深度转型，首次将“教育对科技和人才的支撑”作为核心任务，凸显教育作为国家战略基石的地位。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>教育强国</span><span class='kw-tag'>十五五规划</span><span class='kw-tag'>高质量教育体系</span><span class='kw-tag'>立德树人</span><span class='kw-tag'>教育公平</span><span class='kw-tag'>科技人才一体化</span><span class='kw-tag'>教师队伍</span><span class='kw-tag'>教育对外开放</span>
+                        <a class="card-link" href="http://www.moe.gov.cn/jyb_xwfb/gzdt_gzdt/s5987/202606/t20260629_1442042.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#e74c3c">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#e74c3c15;color:#e74c3c">教育部-新闻</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">国务院印发《教育发展“十五五”规划》答记者问</h4>
+                    <div class="card-core">国务院印发《教育发展“十五五”规划》，明确“十五五”时期建设教育强国的思路目标、重点任务和政策举措。规划背景强调该时期是基本实现社会主义现代化夯实基础、全面发力的关键期，也是教育强国建设蓄势突破期。规划回应内外部环境深刻变化：国际科技竞争加剧、国内高质量发展对新型生产要素需求增强，核心举措聚焦一体推进教育科技人才发展，兼顾国之大计与民生民心双重定位。</div>
+                    <blockquote class="card-insight">“十五五”教育规划首次将教育定位为“国之大计”与“民生民心”双重属性，标志着从单一人才培养向服务国家战略与民生福祉并重的范式转型，政策信号指向教育治理的系统性重构。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>教育强国</span><span class='kw-tag'>十五五规划</span><span class='kw-tag'>新质生产力</span><span class='kw-tag'>教育科技人才一体化</span><span class='kw-tag'>高质量发展</span><span class='kw-tag'>民生保障</span><span class='kw-tag'>共同富裕</span><span class='kw-tag'>系统跃升</span>
+                        <a class="card-link" href="http://www.moe.gov.cn/jyb_xwfb/s271/202606/t20260629_1442009.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#e74c3c">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#e74c3c15;color:#e74c3c">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">中央组织部发布2025年中国共产党党内统计公报：党员队伍稳步壮大与组织体系日趋严密</h4>
+                    <div class="card-core">截至2025年底，中国共产党党员总数达10128.6万名，比上年净增101.5万名；基层党组织543.1万个，净增18.1万个。全年发展党员208.6万名，其中生产一线占51.4%，35岁以下占84.0%，大专及以上学历占54.8%。党员结构持续优化，大专及以上学历占比59.0%，女党员占比31.5%，少数民族党员占比7.8%。全年培训党员人次增长3.7%，对498.7万名基层党组织书记开展脱产培训，表彰先进基层党组织10.8万个。数据表明党的组织体系更加严密，党员教育管理加强。</div>
+                    <blockquote class="card-insight">党员发展向生产一线和年轻高学历群体倾斜，反映党对基层骨干和科技人才的战略吸纳，预示未来政策执行将更依赖专业化、年轻化组织力量。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>党员总量</span><span class='kw-tag'>基层党组织</span><span class='kw-tag'>组织体系</span><span class='kw-tag'>党员结构</span><span class='kw-tag'>教育管理</span><span class='kw-tag'>表彰激励</span><span class='kw-tag'>结构优化</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260630/ddcb5660be6f4dacad8cfb529f0b2a6d/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#e74c3c">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#e74c3c15;color:#e74c3c">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">七部门启动全国社会救助法宣传周活动（民政部等七部门联合通知）</h4>
+                    <div class="card-core">为配合2026年7月1日起施行的《社会救助法》，民政部等七部门于6月29日至7月5日在全国开展“法护民生·助扶万家”主题宣传周活动。重点宣传法律条款、普及救助政策、讲述救助故事，并在浙江杭州启动。中华慈善总会同步启动“守望相助救急难行动”，试点为困难家庭3周岁以下婴幼儿提供救助。活动旨在提升群众知晓度，凝聚社会共识。</div>
+                    <blockquote class="card-insight">此次宣传周标志着社会救助从“政策执行”向“法治化治理”的深度转型，慈善力量与政府救助的联动试点（如婴幼儿救急难）预示未来“政府主导+社会参与”的混合救助模式将加速落地。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>社会救助法</span><span class='kw-tag'>宣传周</span><span class='kw-tag'>法治化</span><span class='kw-tag'>困难群众</span><span class='kw-tag'>慈善联动</span><span class='kw-tag'>救急难</span><span class='kw-tag'>多部门协同</span><span class='kw-tag'>基层治理</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/af156bee0ded432c8c3974727fcfa7a7/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#e74c3c">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#e74c3c15;color:#e74c3c">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">557个药品通过2026年基本医保药品目录初审（国家医保局公示）</h4>
+                    <div class="card-core">国家医保局于2026年6月29日公示通过2026年基本医保药品目录及商保创新药目录初步形式审查的药品名单，共557个药品通过初审，另有54个药品通过商保创新药目录初审。申报材料818份，涉及674个药品通用名，较2025年分别增加100份和41个。形式审查通过率92%，五年内获批新药343个，体现医药创新活跃度提升。公示期至7月5日，接受社会监督。</div>
+                    <blockquote class="card-insight">医保目录调整从“被动筛选”转向“主动吸纳创新药”，释放支持医药产业高质量发展的政策信号；商保创新药目录首次纳入正式流程，预示医保与商保协同的“1+N”保障格局加速成型。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>医保目录</span><span class='kw-tag'>形式审查</span><span class='kw-tag'>创新药</span><span class='kw-tag'>商保目录</span><span class='kw-tag'>药品准入</span><span class='kw-tag'>多层次保障</span><span class='kw-tag'>医药产业</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/89c9e44045e1442abea8add4a23af10c/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#e74c3c">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#e74c3c15;color:#e74c3c">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">伟大征程丨党的十五大：提出新的“三步走”发展战略（历史回顾）</h4>
+                    <div class="card-core">本文回顾了1997年党的十五大历史背景与核心成果。在世纪之交，大会将邓小平理论确立为党的指导思想，并针对“三步走”战略第二步目标即将实现的现实，提出新的“三步走”发展战略，为21世纪中国发展指明方向。大会从思想、政治、组织上为跨世纪发展提供保证，标志着党进入推动建设有中国特色社会主义事业跨世纪发展的关键时期。</div>
+                    <blockquote class="card-insight">党的十五大标志着中国从“解决温饱”向“全面建设小康社会”的战略重心转移，是中国特色社会主义理论体系从“摸着石头过河”到“系统化顶层设计”的关键转折点。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>党的十五大</span><span class='kw-tag'>邓小平理论</span><span class='kw-tag'>三步走战略</span><span class='kw-tag'>指导思想</span><span class='kw-tag'>跨世纪发展</span><span class='kw-tag'>改革开放</span><span class='kw-tag'>中国特色社会主义</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/0764c2d5302540e396abacd5224eddb2/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article></div>
+            </div>            <div class="panel" id="panel-基层治理">
+                <div class="cat-header">
+                    <span class="cat-dot" style="background:#27ae60"></span>
+                    <h2 class="cat-title">基层治理</h2>
+                    <span class="cat-count">9 条</span>
+                </div>
+                <div class="card-list">                <article class="card" style="--color:#27ae60">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#27ae6015;color:#27ae60">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">各地充分发挥党群服务中心作用提升基层治理效能——把为民服务做深做细做到位（新华网报道）</h4>
+                    <div class="card-core">2026年6月24日，习近平总书记在山东德州考察时强调村党组织党建引领作用。报道聚焦党群服务中心作为基层治理前沿阵地，以浙江杭州拱墅区新天地商务社区、山西太原晋源区新城社区等为例，展示其整合托育、养老、社区办公等“一站式”服务。新城社区党群服务中心二层开设托育中心，提供全日托、半日托及临时托服务，收托12-36月龄婴幼儿，配备4名专业育婴师，形成社区服务生态，解决居民急难愁盼。</div>
+                    <blockquote class="card-insight">党群服务中心正从单一党建阵地转型为“党建+民生服务”综合平台，预示基层治理将更注重精准化、场景化服务供给，以“小切口”撬动“大治理”。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>党群服务中心</span><span class='kw-tag'>基层治理</span><span class='kw-tag'>党建引领</span><span class='kw-tag'>社区托育</span><span class='kw-tag'>一站式服务</span><span class='kw-tag'>民生改善</span><span class='kw-tag'>便民服务</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260630/5275143a85aa4ac79e8e5c83fd747323/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#27ae60">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#27ae6015;color:#27ae60">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">街巷映初心 基层党建激活城市治理新动能（新华社报道）</h4>
+                    <div class="card-core">本文报道党建引领城市基层治理的创新实践，聚焦上海陆家嘴“支部建在楼上”模式，通过“楼事会”平台收集近3000个需求，形成五大类170多项服务清单，解决80%以上共性问题。深圳、青岛、杭州等地将党组织嵌入产业链、楼宇、创新链，以组织链串联服务链，激活城市治理新动能。背景为“十五五”规划建议强调加强党建引领基层治理和基层政权建设。</div>
+                    <blockquote class="card-insight">城市治理正从“社区网格”向“楼宇、产业链”等经济空间延伸，党建成为连接“垂直社区”与“水平市场”的枢纽，预示基层治理单元将更灵活、更精准嵌入经济与社会活动。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>党建引领</span><span class='kw-tag'>基层治理</span><span class='kw-tag'>楼宇党建</span><span class='kw-tag'>楼事会</span><span class='kw-tag'>城市治理</span><span class='kw-tag'>产业链党委</span><span class='kw-tag'>民主协商</span><span class='kw-tag'>服务清单</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/6dbdc6eaa1684aed94833f12deb2ae96/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#27ae60">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#27ae6015;color:#27ae60">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">三部门联合发文聚焦农家书屋改革（新华社消息）</h4>
+                    <div class="card-core">中宣部、财政部、农业农村部联合发文，聚焦农家书屋改革。政策背景：解决农家书屋“有书无人读、建管用脱节”问题。核心举措：推动数字化升级、优化图书配置、引入社会力量运营、建立绩效评估机制。量化目标：到2028年，全国农家书屋数字化覆盖率提升至80%以上，年均图书更新率不低于15%。执行主体：县级党委宣传部牵头，财政、农业农村部门协同。覆盖范围：全国58.7万个行政村农家书屋。</div>
+                    <blockquote class="card-insight">政策释放信号：公共文化服务正从“硬件覆盖”转向“效能导向”，数字化与社会化运营成为破解基层文化设施闲置难题的关键路径。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>农家书屋</span><span class='kw-tag'>公共文化服务</span><span class='kw-tag'>数字化改革</span><span class='kw-tag'>基层治理</span><span class='kw-tag'>乡村振兴</span><span class='kw-tag'>绩效评估</span><span class='kw-tag'>社会力量参与</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/71b1ab76449144e48b4b1dcb1a57ce1a/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#27ae60">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#27ae6015;color:#27ae60">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">三部门联合印发《推进农家书屋改革提升促进乡村阅读行动方案》</h4>
+                    <div class="card-core">2026年6月29日，中央宣传部、财政部、农业农村部联合印发《推进农家书屋改革提升促进乡村阅读行动方案》。方案立足“农家”定位，聚焦提升“书”的品质、丰富“屋”的功能、浓厚“读”的氛围，旨在完善适应农村人口结构变化、满足农民阅读需求、顺应信息技术发展潮流的乡村阅读服务体系，提高城乡基本公共服务均等化水平。重点任务包括因地制宜完善布局、聚焦需求优化内容供给、创新形式培育读书风尚、健全机制夯实支撑基础。</div>
+                    <blockquote class="card-insight">政策信号从“建书屋”转向“用书屋”，强调动态适应农村人口结构变化（如老龄化、空心化），预示未来基层文化设施将更注重数字化、流动性和精准匹配，而非单纯物理空间建设。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>农家书屋</span><span class='kw-tag'>乡村阅读</span><span class='kw-tag'>公共服务均等化</span><span class='kw-tag'>农村文化</span><span class='kw-tag'>供给侧改革</span><span class='kw-tag'>跨部门协同</span><span class='kw-tag'>数字阅读</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/9245063e9c3c4cdf93db6a5ab28d00dd/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#27ae60">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#27ae6015;color:#27ae60">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">中央宣传部、财政部、农业农村部联合印发《推进农家书屋改革提升促进乡村阅读行动方案》</h4>
+                    <div class="card-core">三部门联合发文，旨在落实《全民阅读促进条例》，盘活农村阅读设施，培养农民阅读兴趣，助力乡村文化振兴。方案提出分类管理、差异投入、动态调整、效能优先原则，围绕完善布局、优化内容供给、创新形式、健全机制等任务，推动“书屋+”与“+书屋”融合，加强数字服务，培育特色品牌。要求各地部门协同，反对形式主义，落实基层减负。</div>
+                    <blockquote class="card-insight">政策信号从“硬件覆盖”转向“效能提升”，强调分类施策和数字赋能，预示农村公共文化服务将更注重精准匹配人口结构变化和需求差异。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>农家书屋</span><span class='kw-tag'>乡村阅读</span><span class='kw-tag'>文化振兴</span><span class='kw-tag'>公共服务均等化</span><span class='kw-tag'>数字服务</span><span class='kw-tag'>基层减负</span><span class='kw-tag'>分类管理</span><span class='kw-tag'>效能优先</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/00ce63c015ba4e22aafee2d961fc767e/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#27ae60">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#27ae6015;color:#27ae60">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">宁夏同心：号角声声奏响奋进乐章（新华网时政报道）</h4>
+                    <div class="card-core">报道聚焦宁夏同心县在建党105周年之际，通过红军西征纪念馆等红色资源，年均免费接待游客超30万人次，传承革命精神。该县以铸牢中华民族共同体意识为主线，两次获评全国民族团结进步示范县，并依托豫海县回民自治政府旧址等历史遗产，将红色文化与民族团结、乡村振兴结合，打造生态宜居家园。报道展示了基层通过红色教育、文化融合促进社会治理的实践路径。</div>
+                    <blockquote class="card-insight">红色资源与民族团结的深度融合，正成为西部民族地区基层治理的创新抓手，通过文化认同驱动社会整合，为乡村振兴提供软实力支撑。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>红色资源</span><span class='kw-tag'>民族团结</span><span class='kw-tag'>铸牢中华民族共同体意识</span><span class='kw-tag'>基层治理</span><span class='kw-tag'>乡村振兴</span><span class='kw-tag'>同心县</span><span class='kw-tag'>红色旅游</span><span class='kw-tag'>社区融合</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260630/980b67148f5444f5aa8d2d9288f3651a/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#27ae60">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#27ae6015;color:#27ae60">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">基层一线党旗红丨马背医生吾哈斯（新华网时政报道）</h4>
+                    <div class="card-core">报道新疆裕民县牧区71岁医生吾哈斯·苏来曼的先进事迹。他1975年主动申请到牧区工作，退休后仍坚守义诊一线，累计救治患者超10万人次，接生3200余名新生儿，获“全国卫生系统先进工作者”等荣誉，并位列“七一勋章”提名建议人选。该报道在建党105周年之际发布，旨在弘扬基层党员扎根边疆、服务群众的奉献精神。</div>
+                    <blockquote class="card-insight">该报道属于典型人物宣传，而非政策文件，其深层信号是持续强化基层党员在边疆治理中的模范带头作用，但未提供可量化的政策执行框架或资源分配机制。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>基层党员</span><span class='kw-tag'>边疆医疗</span><span class='kw-tag'>民族团结</span><span class='kw-tag'>马背医生</span><span class='kw-tag'>七一勋章</span><span class='kw-tag'>公共服务</span><span class='kw-tag'>牧区治理</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/1615c9db99d24e008ba7d0b3e4ab85b7/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#27ae60">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#27ae6015;color:#27ae60">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">各地区各部门各单位深入开展学习教育——多为群众做好事、办实事、解难事（新华网时政报道）</h4>
+                    <div class="card-core">该报道聚焦2026年6月24日习近平总书记在山东德州考察时关于“树立和践行正确政绩观”的指示。各地区各部门（如德州陵城区、徐州丰县、广元青川县、滁州市、大连普兰店区）通过“开门教育”、“微实事”品牌、议事厅、“小马扎”会议、拉网式排查民生项目、“四下基层”等方式，将学习教育转化为解决群众急难愁盼问题（如沟渠修整、幼儿园建设、营商环境优化）的具体行动，强调干部下沉、资源下沉、问题销号，以增强群众获得感。</div>
+                    <blockquote class="card-insight">此次学习教育从“思想教育”转向“行动检验”，强调以“项目清单销号”和“群众满意度”作为政绩观的核心考核标准，释放出基层治理从“形式主义”向“实效主义”深度转型的明确信号。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>正确政绩观</span><span class='kw-tag'>为民造福</span><span class='kw-tag'>基层治理</span><span class='kw-tag'>开门教育</span><span class='kw-tag'>微实事</span><span class='kw-tag'>四下基层</span><span class='kw-tag'>项目清单</span><span class='kw-tag'>问题销号</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/9e3e71f7826d43d0aa373c811c59f1e5/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#27ae60">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#27ae6015;color:#27ae60">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">热浪来袭 欧盟委员会总部“分楼层开空调”惹争议</h4>
+                    <div class="card-core">2026年6月，欧洲遭遇极端高温天气，比利时布鲁塞尔气温超37摄氏度。欧盟委员会总部贝雷蒙大楼因电力系统不堪重负，强制关闭1至7层空调，仅保留8层及以上高层官员办公区空调。此举引发低楼层约3000名工作人员强烈不满，指责“封建”“可耻”。事件暴露公共机构在极端气候下资源分配的公平性缺陷及应急管理短板。</div>
+                    <blockquote class="card-insight">极端天气频发下，公共部门内部资源分配若不遵循公平原则，将引发治理合法性危机，需建立气候适应性应急预案与透明决策流程。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>极端高温</span><span class='kw-tag'>空调分配</span><span class='kw-tag'>公平性</span><span class='kw-tag'>公共机构</span><span class='kw-tag'>应急管理</span><span class='kw-tag'>员工权益</span><span class='kw-tag'>治理危机</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260629/7a7651b9d88a430b957d5f98f13fdedd/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article></div>
+            </div>            <div class="panel" id="panel-经济与产业">
+                <div class="cat-header">
+                    <span class="cat-dot" style="background:#f39c12"></span>
+                    <h2 class="cat-title">经济与产业</h2>
+                    <span class="cat-count">9 条</span>
+                </div>
+                <div class="card-list">                <article class="card" style="--color:#f39c12">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#f39c1215;color:#f39c12">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">西十高铁铺就东中西部协同发展新通道（新华社报道）</h4>
+                    <div class="card-core">2026年6月30日，西安至十堰高速铁路正式通车运营，设计时速350公里，全长约257公里，桥隧比超90%。该线路将西安至十堰车程压缩至1小时，西安至武汉最快2小时41分钟，打通西北至华中快速通道，推动丝绸之路经济带、长江经济带与中部地区联动协同发展，提升西安枢纽能级，促进十堰从边缘区位蝶变为交通枢纽。</div>
+                    <blockquote class="card-insight">西十高铁标志着中国高铁网络从“四纵四横”向“八纵八横”纵深推进，区域协同发展从政策引导转向基础设施硬联通驱动，生态敏感区建设经验将推广至后续项目。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>西十高铁</span><span class='kw-tag'>区域协同</span><span class='kw-tag'>基础设施</span><span class='kw-tag'>交通枢纽</span><span class='kw-tag'>生态保护</span><span class='kw-tag'>长江经济带</span><span class='kw-tag'>丝绸之路经济带</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260630/c15629a2fd564d5bb0c6abf70b898848/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#f39c12">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#f39c1215;color:#f39c12">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">工业和信息化部回应规范动力储能电池供应商账款支付</h4>
+                    <div class="card-core">2026年6月29日，中国汽车动力电池产业创新联盟与中关村储能产业技术联盟联合发布《动力和储能电池企业供应商账款支付规范倡议》，工信部装备工业一司回应支持。该倡议落实《保障中小企业款项支付条例》，明确材料类和部件类验收时间原则上不超过7个工作日，中小企业供应商账期起算时间为交付或通过验收之日，倡导现金支付及签署长期框架协议。11家重点电池企业积极响应。此举旨在缓解上游供应商资金压力，促进产业链协同发展。</div>
+                    <blockquote class="card-insight">该政策标志着动力电池产业从规模扩张转向精细化治理，通过规范账款支付构建“共赢型”供应链，可能成为其他新兴产业治理的范本。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>动力电池</span><span class='kw-tag'>储能电池</span><span class='kw-tag'>供应商账款</span><span class='kw-tag'>账期规范</span><span class='kw-tag'>中小企业</span><span class='kw-tag'>产业链协同</span><span class='kw-tag'>工信部</span><span class='kw-tag'>行业倡议</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/9aafc4bc27f847ccbb0132d5cd8fb20d/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#f39c12">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#f39c1215;color:#f39c12">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">中欧贸易投资磋商机制首次会议举行并发表联合声明</h4>
+                    <div class="card-core">2026年6月29日，中国商务部部长王文涛与欧盟贸易委员谢夫乔维奇在布鲁塞尔举行中欧贸易投资磋商机制首次会议并发表联合声明。机制旨在加强部长级政策对话，稳定双边关系，下设贸易投资平衡、出口管制、知识产权、世贸组织改革四个工作板块。双方同意建立联合监测机制交换贸易数据，讨论关税与非关税措施以扩大市场准入，并在稀土等关键原材料出口管制对话中取得积极成果，计划2026年秋季再次举行部长级会议。</div>
+                    <blockquote class="card-insight">中欧从“应急式谈判”转向“机制化管控”，出口管制对话聚焦稀土等战略资源，预示全球关键矿产供应链治理进入“规则博弈”新阶段。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>中欧贸易</span><span class='kw-tag'>投资磋商机制</span><span class='kw-tag'>出口管制</span><span class='kw-tag'>稀土</span><span class='kw-tag'>知识产权</span><span class='kw-tag'>世贸组织改革</span><span class='kw-tag'>联合监测</span><span class='kw-tag'>市场准入</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260630/8e745055a516419e8acd0a6ff65595e4/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#f39c12">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#f39c1215;color:#f39c12">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">经济热点问答丨霍尔木兹海峡风波再起 国际油价走向何方（新华社国际新闻）</h4>
+                    <div class="card-core">美伊围绕霍尔木兹海峡通航问题再起军事摩擦，导致国际油价再次上涨。此前美伊达成谅解备忘录后，布伦特原油价格从约120美元/桶回落至接近冲突前70美元/桶水平。标普全球预计若谈判顺利，年底油价将维持在70美元/桶附近；高盛将2026年四季度布伦特油价预期从90美元下调至80美元。全球石油库存重建过程或持续至年底，海湾地区石油产量预计10月前后恢复正常。</div>
+                    <blockquote class="card-insight">霍尔木兹海峡危机表明，中东地缘政治风险仍是全球油价短期波动的核心变量，但长期看，石油库存重建和产量恢复将抑制油价过度上涨，中国应抓住窗口期优化能源进口结构。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>霍尔木兹海峡</span><span class='kw-tag'>国际油价</span><span class='kw-tag'>美伊谈判</span><span class='kw-tag'>石油库存重建</span><span class='kw-tag'>能源安全</span><span class='kw-tag'>地缘政治风险</span><span class='kw-tag'>战略石油储备</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260629/280f50d3cf4345a2bd54f3f058555a27/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#f39c12">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#f39c1215;color:#f39c12">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">数字税再成欧美经贸摩擦点（爱尔兰媒体社论分析）</h4>
+                    <div class="card-core">爱尔兰媒体《爱尔兰时报》指出，美国总统特朗普威胁对征收数字服务税的欧洲国家收取100%报复性关税，加剧欧美经贸紧张。英国、法国、意大利等国已开征数字服务税，旨在对大型跨国科技企业征税。尽管欧盟与美国去年达成贸易协议，但关税威胁未消。欧洲议会建议统一数字税，但因需27国一致同意而难落实。爱尔兰作为美国数字企业欧洲总部所在地，经济高度依赖美国投资，若贸易战爆发将受冲击。</div>
+                    <blockquote class="card-insight">数字税争端表明，即便有贸易协议，单边关税威胁仍是美国施压工具，跨大西洋经贸关系将持续受政治周期影响，欧盟需探索更灵活的税收协调机制。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>数字服务税</span><span class='kw-tag'>报复性关税</span><span class='kw-tag'>欧美经贸摩擦</span><span class='kw-tag'>跨国科技企业</span><span class='kw-tag'>贸易战</span><span class='kw-tag'>欧盟协调</span><span class='kw-tag'>爱尔兰经济</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260630/49331b62c9a94db4adcbb0a04ef79eed/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#f39c12">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#f39c1215;color:#f39c12">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">外交部：解决中欧经贸关切的钥匙在于深化中欧合作</h4>
+                    <div class="card-core">外交部发言人郭嘉昆在例行记者会上回应中欧经贸关切，强调中欧是伙伴而非对手，经贸合作本质为互利共赢。指出欧盟问题根源不在中国，解决关切的钥匙在于深化合作、共同发展。中方愿本着平等、尊重、互惠原则，以建设性方式妥善处理贸易分歧，维护全球产供链稳定。此表态旨在回应欧盟近期对华贸易保护主义倾向，释放合作信号。</div>
+                    <blockquote class="card-insight">此表态反映中国在应对欧盟贸易保护主义时，坚持“合作优先”策略，避免对抗升级，但深层信号是中方已预判到中欧经贸摩擦可能常态化，需通过持续沟通管控分歧。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>中欧关系</span><span class='kw-tag'>经贸合作</span><span class='kw-tag'>互利共赢</span><span class='kw-tag'>贸易分歧</span><span class='kw-tag'>全球产供链</span><span class='kw-tag'>外交表态</span><span class='kw-tag'>伙伴关系</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260630/58c4d1bd841f49ba884fe8d3e368097a/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#f39c12">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#f39c1215;color:#f39c12">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">我国将迎来第22个中国航海日（交通运输部新闻发布会）</h4>
+                    <div class="card-core">2026年7月11日为第22个中国航海日，主题为“数智赋能，领航未来”。交通运输部副部长李兴湖在国新办发布会上介绍，活动紧扣“十五五”高质量发展要求，强调数智化升级。保留船舶挂满旗、集体鸣笛等传统，创新举办线上线下主场活动，发布《国内水域新能源船型2026》等行业成果，并推出群众性活动如涉海文物线上展示、主题水路客运航次，旨在拉近群众与航海距离。</div>
+                    <blockquote class="card-insight">航海日主题从传统纪念转向“数智赋能”，预示“十五五”期间航运业政策重心将聚焦数字化升级与绿色转型，以应对全球海事治理新趋势。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>中国航海日</span><span class='kw-tag'>数智赋能</span><span class='kw-tag'>新能源船型</span><span class='kw-tag'>航运业</span><span class='kw-tag'>交通运输部</span><span class='kw-tag'>群众性活动</span><span class='kw-tag'>行业成果</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260630/b99f997bc274439eb7a3cebbb75c0ec2/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#f39c12">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#f39c1215;color:#f39c12">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">镜观中国丨加速破圈的3D打印 让创意快步走进现实（新华网报道）</h4>
+                    <div class="card-core">报道指出，消费级3D打印机在2026年“618”期间成为消费新宠，从工业设备向家庭普及。核心驱动因素包括：国内企业自研运动控制算法、优化挤出系统、提升软硬件协同与易用性；国内完备的机电与精密加工产业链支撑核心零部件国产化与规模化量产，推动成本下探。覆盖范围从实验室、工厂车间扩展至普通家庭和手工爱好者。</div>
+                    <blockquote class="card-insight">消费级3D打印“破圈”标志着增材制造从专业工具向大众消费品的范式转变，其产业链自主可控与成本优势将成为中国在全球3D打印消费市场的核心竞争力。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>消费级3D打印机</span><span class='kw-tag'>增材制造</span><span class='kw-tag'>产业链自主可控</span><span class='kw-tag'>成本下探</span><span class='kw-tag'>个性化消费</span><span class='kw-tag'>创客文化</span><span class='kw-tag'>模型共享社区</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/803ad16ad1fa4cdd87fc1284da04d274/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#f39c12">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#f39c1215;color:#f39c12">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">中企参与承建阿联酋首条客运铁路试运营（国际动态）</h4>
+                    <div class="card-core">阿联酋首条客运铁路阿提哈德客运铁路于2026年6月30日启动试运营，首期开通阿布扎比至富查伊拉线路，全程约1小时45分钟。该铁路将连接7个酋长国的11个城市和地区，设11座车站，预计2030年客运总量达3600万人次。多家中国企业（中铁国际、中国中车、中国电建、中国土木等）参与建设，被定位为“一带一路”标志性成果。</div>
+                    <blockquote class="card-insight">中企从单一工程承包转向全产业链参与，标志中国基建出海模式升级；阿联酋铁路网建设将加速海湾地区交通一体化进程。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>阿联酋客运铁路</span><span class='kw-tag'>一带一路</span><span class='kw-tag'>中企出海</span><span class='kw-tag'>基础设施</span><span class='kw-tag'>交通一体化</span><span class='kw-tag'>全产业链</span><span class='kw-tag'>国际合作</span>
+                        <a class="card-link" href="https://www.news.cn/silkroad/20260701/678e831ecf5f48548e05a2b3f606f6fb/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article></div>
+            </div>            <div class="panel" id="panel-综合">
+                <div class="cat-header">
+                    <span class="cat-dot" style="background:#7f8c8d"></span>
+                    <h2 class="cat-title">综合</h2>
+                    <span class="cat-count">30 条</span>
+                </div>
+                <div class="card-list">                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">人民日报社论：砥砺初心使命 书写时代答卷——热烈庆祝中国共产党成立105周年</h4>
+                    <div class="card-core">2026年7月1日，人民日报发表社论庆祝中国共产党成立105周年。社论回顾了党领导人民创造的经济快速发展和社会长期稳定两大奇迹，强调中国式现代化是强国建设、民族复兴的康庄大道。核心举措包括：持续回答延安“窑洞之问”，深化习近平新时代中国特色社会主义思想特别是习近平党建思想的学习贯彻，坚定“四个自信”，把握历史主动。执行主体为全党，覆盖全国各级党组织和党员，旨在凝聚共识、统一行动，推进第二个百年奋斗目标新征程。</div>
+                    <blockquote class="card-insight">社论将“窑洞之问”与新时代治理能力建设挂钩，释放出持续深化自我革命、提升执政合法性和治理效能的强烈信号，预示未来五年将更注重制度性反腐和全过程人民民主的实践落地。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>初心使命</span><span class='kw-tag'>中国式现代化</span><span class='kw-tag'>窑洞之问</span><span class='kw-tag'>习近平党建思想</span><span class='kw-tag'>四个自信</span><span class='kw-tag'>治理效能</span><span class='kw-tag'>民族复兴</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260630/e7cd8f236eb346f994ee7a306f1eb62d/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">新华社政论片《习近平党建思想引领强党强国新征程》播出（建党105周年献礼）</h4>
+                    <div class="card-core">为庆祝中国共产党成立105周年，新华社于2026年7月1日播发大型政论片，系统阐释习近平党建思想的里程碑意义。该片强调“马克思主义行、中国化时代化的马克思主义行”，指出习近平党建思想是习近平新时代中国特色社会主义思想的党建篇，引领党从“世界第一大党”迈向“世界最强大政党”。内容聚焦党在民族复兴、中国式现代化中的核心领导作用，旨在强化全党思想统一与行动一致。</div>
+                    <blockquote class="card-insight">该片释放了党在新时代持续深化自我革命、以党建统领全局的强烈信号，预示未来政策制定将更强调“政治引领”与“组织效能”的融合。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>习近平党建思想</span><span class='kw-tag'>建党105周年</span><span class='kw-tag'>政论片</span><span class='kw-tag'>中国式现代化</span><span class='kw-tag'>马克思主义中国化</span><span class='kw-tag'>党的自我革命</span><span class='kw-tag'>政治引领</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260701/1b5cecb4814a4db0a8e5a14efd9050b4/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">教育部-新闻</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">教育部召开高校党的创新理论研究阐释和中国哲学社会科学自主知识体系构建工程推进会</h4>
+                    <div class="card-core">2026年6月30日，教育部召开工程推进会，部长怀进鹏出席，部署面向“十五五”推动高校哲学社会科学高质量发展。核心举措包括：以党的创新理论引领，推进体系化学理化研究；分学科构建以标识性概念、原创性理论为主干的自主知识体系；加快构建中国自主教材体系；强化立德树人根本任务。执行主体为全国高校，覆盖哲学社会科学全领域，旨在支撑中国式现代化、提升国家软实力。</div>
+                    <blockquote class="card-insight">该工程标志着中国哲学社会科学从“跟跑”向“领跑”转型，通过“十五五”规划强化资源配套，实质化推进自主知识体系构建，是应对科技变革和全球治理挑战的战略布局。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>党的创新理论</span><span class='kw-tag'>哲学社会科学</span><span class='kw-tag'>自主知识体系</span><span class='kw-tag'>高校</span><span class='kw-tag'>十五五规划</span><span class='kw-tag'>立德树人</span><span class='kw-tag'>教材体系</span><span class='kw-tag'>国家软实力</span>
+                        <a class="card-link" href="http://www.moe.gov.cn/jyb_xwfb/gzdt_gzdt/moe_1485/202607/t20260701_1442242.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">湖南援疆医疗队：治病又润心（新华网专题报道）</h4>
+                    <div class="card-core">湖南省援疆医疗队近30年对口支援新疆吐鲁番市，累计派出535名医生，创立“红石榴·湖南援疆‘毛医生’医疗队”品牌。通过走村入户巡回义诊、定期坐诊等方式，将健康服务送到农牧区群众家门口，并完成多例高技术含量手术，提升当地诊疗水平。该品牌源于群众自发称呼，转化为援疆工作自觉行动，体现“治病润心”效能，成为党的关怀直抵基层的生动载体。</div>
+                    <blockquote class="card-insight">“毛医生”品牌从群众自发认可到组织化运作，标志着对口支援从“任务驱动”向“情感治理”转型，未来可能推广为边疆公共服务品牌化模式。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>对口支援</span><span class='kw-tag'>医疗援疆</span><span class='kw-tag'>民族团结</span><span class='kw-tag'>基层治理</span><span class='kw-tag'>品牌化</span><span class='kw-tag'>情感治理</span><span class='kw-tag'>巡回义诊</span><span class='kw-tag'>技术转移</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/647258510a704cea8eda505e5287d42f/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">7月新规（新华社权威快报）</h4>
+                    <div class="card-core">2026年7月起，一批重要的法律法规将正式施行，涵盖经济、社会、治理等多个领域。具体法规内容未在正文中详细列出，但作为国家级法律法规的集中实施节点，涉及执行主体为各级政府及相关部门，覆盖全国范围。此举旨在通过法治手段规范社会行为、优化治理体系，体现政策连续性与系统性。</div>
+                    <blockquote class="card-insight">7月新规集中发布反映政策节奏加快，预示下半年将聚焦法治化营商环境与民生保障，需关注具体法规的量化目标与执行效果评估。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>法律法规</span><span class='kw-tag'>7月施行</span><span class='kw-tag'>政策集中</span><span class='kw-tag'>法治建设</span><span class='kw-tag'>治理优化</span><span class='kw-tag'>民生保障</span><span class='kw-tag'>执行主体</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260629/13dc385d663842ca9f3ad7ce92cbd5dd/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-07-01</span>
+                    </div>
+                    <h4 class="card-title">世界读懂中国共产党｜“实现愿景的非凡能力”（新华社评论）</h4>
+                    <div class="card-core">本文为新华社在建党105周年之际发表的国际评论，通过海外学者、政要视角，总结中国共产党治国理政的“非凡能力”：即长期战略规划与务实政策调整相结合的能力，以及抵御保护主义、单边主义逆风，推动产业升级、创新突破，以新质生产力重塑全球竞争优势的制度优势。文章强调，中国共产党的政策框架提供了长期方向与灵活性，区别于西方政党的短期决策。</div>
+                    <blockquote class="card-insight">本文释放了明确的政策信号：中国将坚持长期主义战略框架，以制度韧性应对全球不确定性，并持续以“新质生产力”作为经济转型的核心抓手。这预示着未来政策将更注重战略定力与动态调整的平衡。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>中国共产党</span><span class='kw-tag'>长期战略规划</span><span class='kw-tag'>新质生产力</span><span class='kw-tag'>高质量发展</span><span class='kw-tag'>制度优势</span><span class='kw-tag'>全球治理</span><span class='kw-tag'>政策连续性</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260701/669d6707a0a64734ad7830c36cf59295/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-07-01</span>
+                    </div>
+                    <h4 class="card-title">中方在联合国近东救济工程处认捐会呼吁加大支持力度（外交动态）</h4>
+                    <div class="card-core">2026年6月30日，中国常驻联合国副代表孙磊在联合国近东救济工程处认捐会上指出，资金短缺严重限制其援助能力，呼吁国际社会特别是传统捐助方加大支持。加沙冲突后，工程处为200多万民众提供生命线，390多名员工牺牲。中方坚决反对打压工程处，敦促以色列保障其特权，并承诺继续提供稳定资金支持，推动“两国方案”与巴勒斯坦问题公正解决。</div>
+                    <blockquote class="card-insight">中方表态凸显在巴以问题上从“原则性支持”转向“具体行动与资金承诺”，强化了作为负责任大国的国际形象，同时通过敦促以色列履行义务，间接施压关键行为体。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>近东救济工程处</span><span class='kw-tag'>巴勒斯坦难民</span><span class='kw-tag'>人道主义援助</span><span class='kw-tag'>加沙冲突</span><span class='kw-tag'>两国方案</span><span class='kw-tag'>联合国</span><span class='kw-tag'>多边主义</span><span class='kw-tag'>中国外交</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260701/98eca8f6b914440fa538ee6cd6904414/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">中方在安理会就无人机袭击白俄罗斯平民事件表达关切（中国常驻联合国副代表发言）</h4>
+                    <div class="card-core">2026年6月29日，中国常驻联合国副代表孙磊在安理会紧急公开会上，对无人机袭击导致白俄罗斯平民伤亡事件表示关切。中方谴责针对平民的袭击，指出俄乌冲突已造成单月平民伤亡达战争爆发以来峰值，并产生严重外溢影响，危及地区其他国家民众安全。中方呼吁当事方保持克制、遵守国际人道法、避免袭击平民和民用基础设施，推动停火止战，并呼吁各方恢复谈判，达成全面、持久、有约束力的和平协议。</div>
+                    <blockquote class="card-insight">此次表态凸显俄乌冲突外溢风险加剧，平民伤亡数据达峰值表明冲突已进入高烈度阶段；中方强调“有约束力的和平协议”，暗示对现有谈判框架的升级诉求，可能推动国际社会重新评估调解路径。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>无人机袭击</span><span class='kw-tag'>平民伤亡</span><span class='kw-tag'>俄乌冲突</span><span class='kw-tag'>安理会</span><span class='kw-tag'>国际人道法</span><span class='kw-tag'>停火止战</span><span class='kw-tag'>政治解决</span><span class='kw-tag'>外溢影响</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260630/889bd9abbf4b45c9806d0f5f13c182e4/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-时政</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">纸短情长 字字滚烫——重读红色书信（新华网时政报道）</h4>
+                    <div class="card-core">该报道为2026年“七一”前夕的红色文化宣传动态，通过重读王孝和、陈望道、黄宝妹等革命先辈及英模的红色书信，展现家国情怀与理想信念。报道由新华网发布，依托上海市档案馆史料，旨在弘扬红色精神，强化爱国主义教育。无具体政策文件、量化目标或执行主体，属于常规性文化宣传报道。</div>
+                    <blockquote class="card-insight">此类报道是“七一”前后常态化宣传的组成部分，反映政府持续通过历史叙事巩固主流价值观，但缺乏具体政策创新或制度突破。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>红色书信</span><span class='kw-tag'>爱国主义教育</span><span class='kw-tag'>党史学习</span><span class='kw-tag'>文化宣传</span><span class='kw-tag'>档案利用</span><span class='kw-tag'>家国情怀</span>
+                        <a class="card-link" href="https://www.news.cn/politics/20260630/820e72d9cdc647c1a59552adb35393c6/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-07-01</span>
+                    </div>
+                    <h4 class="card-title">盖洛普：2025年美国人因诈骗损失680亿美元（资讯参考）</h4>
+                    <div class="card-core">盖洛普与反诈骗联盟联合调查显示，2025年约10%美国成年人或其家人遭诈骗，估算总损失680亿美元（日均1.86亿美元），平均每案5578美元。73%受害者心理健康受影响，低收入、低学历及少数族裔受害比例更高。12%案件涉及AI或深度伪造技术。82%受访者认为政府防范不足，58%受害者不知如何报案，75%认为报案无助于追回损失。诈骗导致消费者信心下降，网购意愿降低。</div>
+                    <blockquote class="card-insight">AI深度伪造技术正成为诈骗新工具，传统反诈手段面临技术迭代挑战；公众对政府治理能力的信任度因报案无果而持续下降，形成“诈骗-不信任”恶性循环。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>诈骗损失</span><span class='kw-tag'>消费者信心</span><span class='kw-tag'>AI深度伪造</span><span class='kw-tag'>弱势群体</span><span class='kw-tag'>政府治理</span><span class='kw-tag'>报案率</span><span class='kw-tag'>心理健康</span><span class='kw-tag'>反诈联盟</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260701/0695ff791d404722951d766a6d8090c4/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-28</span>
+                    </div>
+                    <h4 class="card-title">马来西亚媒体：中国为应对老龄化提供借鉴（资讯参考）</h4>
+                    <div class="card-core">马来西亚《星报》发文称，中国通过发展银发经济、推进积极老龄化和科技赋能养老等举措，为马来西亚应对老龄化提供借鉴。中国银发经济已涵盖健康管理、康复服务、老年教育、旅游、理财、适老产品、社区服务及智能科技等领域，预计将成为增长最快行业之一。中国在AI、机器人、数字医疗和物联网技术应用于智慧养老方面取得显著进展，智能监测、远程医疗等提升老年人生活质量。马来西亚60岁以上人口占11.6%，预计2030年步入老龄化国家行列，双方在智慧养老、医疗科技、终身学习等领域合作前景广阔。</div>
+                    <blockquote class="card-insight">中国银发经济正从“被动养老”转向“主动享老”，科技与产业融合成为核心驱动力，未来可能催生全球老龄化解决方案的中国标准。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>银发经济</span><span class='kw-tag'>积极老龄化</span><span class='kw-tag'>智慧养老</span><span class='kw-tag'>科技赋能</span><span class='kw-tag'>国际合作</span><span class='kw-tag'>马来西亚</span><span class='kw-tag'>老龄化社会</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260628/1f1ea7fc4428488ab46ae4e45a0b349c/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">中国－中亚大学生创新创业大赛在乌兹别克斯坦举行（资讯参考）</h4>
+                    <div class="card-core">2026年6月28-29日，中国－中亚大学生创新创业大赛暨中国国际大学生创新大赛（2026）中亚区域赛决赛在乌兹别克斯坦塔什干举行。大赛由中国教育部高教司指导，丝绸之路农业教育科技创新联盟与乌方主办，吸引中亚五国108所高校736个团队注册，35个项目晋级决赛，15个项目获金奖。活动旨在促进青年科技创新合作，构建中国－中亚命运共同体，并推动形成常态化机制。</div>
+                    <blockquote class="card-insight">该赛事从单一竞赛向常态化机制转型，标志着中国与中亚教育合作从政府主导转向“政府-高校-青年”多元共治模式，未来可能成为区域创新政策协调的试验田。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>中国-中亚</span><span class='kw-tag'>创新创业</span><span class='kw-tag'>大学生</span><span class='kw-tag'>教育合作</span><span class='kw-tag'>区域协同</span><span class='kw-tag'>常态化机制</span><span class='kw-tag'>命运共同体</span>
+                        <a class="card-link" href="https://www.news.cn/silkroad/20260630/c93a2ce4e7254956b4ea449cb954be62/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">中国援乍得供水项目改善旱季民生（国际发展合作动态）</h4>
+                    <div class="card-core">中国援乍得供水项目在芒杜尔省和萨拉马特省实施，截至2026年6月已新建522口手压井、57座集中供水站、20口乡村井及111座公共厕所。项目由江西国际经济技术合作公司负责，2024年10月底启动施工，旨在解决旱季居民长途取水（4公里）及脏水致病问题，惠及马丹社区等6000余名居民。项目克服了阿布代亚地区复杂地质条件，经8个月攻关成功打井。</div>
+                    <blockquote class="card-insight">该项目体现中国对外援助从“硬件建设”向“民生改善”深化，强调技术攻关与社区参与，可能成为中非合作论坛框架下“小而美”项目的典型。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>援外项目</span><span class='kw-tag'>供水工程</span><span class='kw-tag'>民生改善</span><span class='kw-tag'>公共卫生</span><span class='kw-tag'>中非合作</span><span class='kw-tag'>技术攻关</span><span class='kw-tag'>旱季治理</span>
+                        <a class="card-link" href="https://www.news.cn/silkroad/20260629/a1b583c9bb644d75b2d7c1d37f682363/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-07-01</span>
+                    </div>
+                    <h4 class="card-title">以军在约旦河西岸发起大规模突袭行动（国际动态）</h4>
+                    <div class="card-core">2026年6月30日，以色列军队在约旦河西岸拉姆安拉、比拉、纳布卢斯、希伯伦等多地发起大规模突袭，搜查房屋、逮捕至少一名巴勒斯坦人，并破坏监控系统。此前一天，以军在比拉市打死一名15岁巴勒斯坦少年。本轮巴以冲突（2023年10月爆发）以来，约旦河西岸已有至少1085名巴勒斯坦人死亡。以军行动持续引发国际社会关注。</div>
+                    <blockquote class="card-insight">该事件反映巴以冲突外溢至约旦河西岸的常态化趋势，国际社会对以色列军事行动的约束力持续弱化，可能进一步激化地区矛盾。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>巴以冲突</span><span class='kw-tag'>约旦河西岸</span><span class='kw-tag'>以色列</span><span class='kw-tag'>突袭行动</span><span class='kw-tag'>人道主义危机</span><span class='kw-tag'>国际法</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260701/4d334a28e7a94893a51f9da9d413e37b/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-07-01</span>
+                    </div>
+                    <h4 class="card-title">韩国总统任命韩圣淑为新国务总理（资讯参考）</h4>
+                    <div class="card-core">韩国总统李在明于2026年7月1日正式任命前中小风险企业部长官韩圣淑为新任国务总理。韩圣淑曾担任互联网企业CEO，拥有数字产业与经营经验。此举旨在推动韩国AI产业大转型，以AI作为经济增长与国家竞争力提升的核心引擎，带动经济创新与全民共同发展。</div>
+                    <blockquote class="card-insight">韩国将AI上升为国家战略引擎，通过任命产业界背景总理强化执行，预示全球主要经济体在AI治理与产业政策上的竞争将进一步白热化。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>韩国</span><span class='kw-tag'>国务总理</span><span class='kw-tag'>韩圣淑</span><span class='kw-tag'>人工智能</span><span class='kw-tag'>数字化转型</span><span class='kw-tag'>产业政策</span><span class='kw-tag'>中小企业</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260701/6c47a28743dd4dcd855cba650a64d5bc/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-07-01</span>
+                    </div>
+                    <h4 class="card-title">消息人士：美伊将在多哈举行间接会谈（资讯参考）</h4>
+                    <div class="card-core">2026年7月1日，据海湾国家消息人士透露，美国和伊朗将在卡塔尔斡旋下于多哈举行间接会谈，双方不会直接会面。美方代表团由总统特使威特科夫和特朗普女婿库什纳带队，但仅参与前期斡旋，伊朗方面由非高级别官员参加，会谈为低级别技术性磋商。该事件反映中东地缘政治紧张局势下的外交试探，但缺乏具体政策框架或量化目标。</div>
+                    <blockquote class="card-insight">此次会谈级别较低且为间接形式，表明美伊双方仍处于试探性接触阶段，短期内达成实质性协议可能性低，更多是缓解紧张局势的信号释放。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>美伊关系</span><span class='kw-tag'>间接会谈</span><span class='kw-tag'>卡塔尔斡旋</span><span class='kw-tag'>低级别技术性会谈</span><span class='kw-tag'>中东外交</span><span class='kw-tag'>地缘政治</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260701/bb8e94b06f464a70b7cba18860abc13c/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-07-01</span>
+                    </div>
+                    <h4 class="card-title">美最高法院推翻特朗普限制“出生公民权”行政令</h4>
+                    <div class="card-core">2026年6月30日，美国最高法院以6:3裁决维持下级法院判决，推翻特朗普总统限制“出生公民权”的行政令。该行政令规定父母均非美国公民或合法永久居民的新生儿不能自动获得公民身份，引发多地诉讼。最高法院认定该行政令违反美宪法第十四修正案，该修正案规定所有在美国出生或归化并受美国司法管辖的人均为美国公民。这是最高法院继2月判定特朗普关税违法后再次否决其重大政策。</div>
+                    <blockquote class="card-insight">美国最高法院连续否决总统重大政策，显示司法系统在移民等敏感议题上对行政扩张的强力制约，可能加剧行政与司法分支的长期博弈。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>出生公民权</span><span class='kw-tag'>美国最高法院</span><span class='kw-tag'>特朗普</span><span class='kw-tag'>行政令</span><span class='kw-tag'>宪法第十四修正案</span><span class='kw-tag'>司法审查</span><span class='kw-tag'>移民政策</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260701/5e4cd9dbb51d41778fa589127598c47c/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">巴基斯坦拉合尔补习中心屋顶坍塌事故致14名儿童死亡（国际突发事件）</h4>
+                    <div class="card-core">2026年6月30日，巴基斯坦旁遮普省拉合尔一补习中心屋顶坍塌，造成14名儿童死亡、多人受伤。事发时学生正在上课，约10名儿童伤势严重。警方已控制承建承包商。总理夏巴兹发表声明哀悼。该事件暴露建筑安全监管与应急响应短板。</div>
+                    <blockquote class="card-insight">此类事故频发提示发展中国家需建立建筑安全终身责任制，并加强补习机构等非正式教育场所的准入监管。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>巴基斯坦</span><span class='kw-tag'>屋顶坍塌</span><span class='kw-tag'>儿童伤亡</span><span class='kw-tag'>建筑安全</span><span class='kw-tag'>应急响应</span><span class='kw-tag'>监管漏洞</span><span class='kw-tag'>补习中心</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260630/d60e6b9afc354b398f104736bfedd112/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">在委中资企业向委方捐赠物资超115吨（新华网国际报道）</h4>
+                    <div class="card-core">截至2026年6月29日，在委内瑞拉中资企业已向委方捐赠物资超115吨，涵盖食品、饮用水、日用品、小型施工机具及医药物资等。另有超200吨物资将于7月1日至3日分批运抵。强震后，多家工程类中资企业主动调配工程机械设备（如吊机、挖掘机、应急发电机）并组织专业人员参与救援。该行动体现中国企业在海外应急响应中的社会责任与快速动员能力。</div>
+                    <blockquote class="card-insight">此次行动标志着中国海外企业从单纯的经济参与向“经济+人道主义”复合型角色转变，未来可能形成制度化应急响应机制，纳入国家海外利益保护体系。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>中资企业</span><span class='kw-tag'>委内瑞拉</span><span class='kw-tag'>强震</span><span class='kw-tag'>人道主义捐赠</span><span class='kw-tag'>应急响应</span><span class='kw-tag'>海外社会责任</span><span class='kw-tag'>物资调配</span><span class='kw-tag'>工程设备</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260630/c9088431455c46bca58d76bdcea0b8b5/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">中国红会向委内瑞拉红会提供紧急人道主义现汇援助（中国红十字会总会，2026年6月30日）</h4>
+                    <div class="card-core">针对委内瑞拉近期发生7.2级和7.5级两次强烈地震，造成重大人员伤亡和财产损失，中国红十字会总会于2026年6月30日宣布，向委内瑞拉红十字会提供30万美元紧急人道主义现汇援助，用于支持其救灾与灾后重建工作。此举属于国际人道主义援助范畴，执行主体为中国红十字会，覆盖委内瑞拉灾区。</div>
+                    <blockquote class="card-insight">此次援助以现汇形式而非物资，体现对受援国自主救灾能力的信任，但30万美元规模表明其象征意义大于实际救灾效果，可能为后续更大规模政府间援助铺垫。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>中国红十字会</span><span class='kw-tag'>委内瑞拉</span><span class='kw-tag'>人道主义援助</span><span class='kw-tag'>现汇援助</span><span class='kw-tag'>地震救灾</span><span class='kw-tag'>灾后重建</span><span class='kw-tag'>国际援助</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260630/2a0ff1c3be56458781da686e649bd507/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">委内瑞拉代总统感谢中国地震援助（外交动态）</h4>
+                    <div class="card-core">2026年6月30日，委内瑞拉代总统德尔西·罗德里格斯通过社交媒体感谢中国政府在地震后提供的援助，称援助将用于住房重建、购置必需物资、设备和材料。此举体现中国对委内瑞拉的人道主义支持，但未提及具体援助金额或项目细节，属于常规外交表态。</div>
+                    <blockquote class="card-insight">此事件为常规外交表态，无显著政策信号或趋势变化，属于资讯参考。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>委内瑞拉</span><span class='kw-tag'>地震援助</span><span class='kw-tag'>人道主义</span><span class='kw-tag'>外交动态</span><span class='kw-tag'>中国对外援助</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260630/6f23ede2b0b848df98eeaebe468d4663/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">教育部-新闻</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">怀进鹏为教育部直属机关全体党员干部讲专题党课</h4>
+                    <div class="card-core">2026年6月30日，教育部党组书记、部长怀进鹏以“深入学习贯彻习近平党建思想 以正确政绩观推进教育强国建设”为题，为直属机关全体党员干部讲专题党课。党课强调学习习近平党建思想，树立正确政绩观，将学习成果转化为推进教育强国建设的实际成效，支撑中国式现代化。执行主体为教育部直属机关全体党员干部，覆盖范围限于教育系统内部。</div>
+                    <blockquote class="card-insight">本次党课是“十五五”开局之年教育系统内部政治动员，信号在于将党建与政绩观作为教育强国建设的核心驱动力，预示后续教育政策将更强调政治导向与绩效问责。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>习近平党建思想</span><span class='kw-tag'>正确政绩观</span><span class='kw-tag'>教育强国建设</span><span class='kw-tag'>教育部</span><span class='kw-tag'>专题党课</span><span class='kw-tag'>高质量党建</span><span class='kw-tag'>中国式现代化</span>
+                        <a class="card-link" href="http://www.moe.gov.cn/jyb_xwfb/gzdt_gzdt/moe_1485/202607/t20260701_1442244.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">教育部-新闻</span>
+                        <span class="star full">&#9733;</span><span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">不忘来路 笃定前行——各地师生多形式庆祝中国共产党成立一百零五周年（教育部新闻）</h4>
+                    <div class="card-core">2026年6月，教育部报道各地各校以党史学习教育为主线，通过红色资源开展庆祝建党105周年活动。核心举措包括：北京市联合党史馆启动“请党放心，强国有我”大中小学思政实践研学活动；雄安新区与云南合作开展“同心向党 情系边疆”爱国主义教育实践。活动覆盖大中小学师生，旨在赓续红色血脉，强化思政教育一体化建设。</div>
+                    <blockquote class="card-insight">该活动显示红色资源正从“静态展示”转向“动态育人”，思政教育从课堂向实践基地延伸，强化了党史学习教育的制度化与常态化。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>党史学习教育</span><span class='kw-tag'>思政教育一体化</span><span class='kw-tag'>红色资源</span><span class='kw-tag'>实践研学</span><span class='kw-tag'>爱国主义教育</span><span class='kw-tag'>大中小学</span><span class='kw-tag'>跨区域合作</span>
+                        <a class="card-link" href="http://www.moe.gov.cn/jyb_xwfb/s5147/202606/t20260629_1441962.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-29</span>
+                    </div>
+                    <h4 class="card-title">全球连线丨匈牙利艺术家在中国古建中寻找创作灵感（资讯参考）</h4>
+                    <div class="card-core">2026年6月17日至28日，23位匈牙利艺术家、艺术院校师生及文化工作者在山西太原、忻州、大同等地开展“丝路画语·印象山西”古建采风创作活动，聚焦应县木塔、云冈石窟、平遥古城等文化遗产。活动以艺术为纽带，依托山西省与匈牙利索尔诺克州自2007年缔结的友好省州关系，推动中匈人文交流与文明互鉴。执行主体为新华社音视频部及山西地方文化机构，覆盖中匈两国文化教育领域。</div>
+                    <blockquote class="card-insight">此类活动为常规人文交流项目，未涉及政策调整或资源分配，属于文化软实力展示的日常动态。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>中匈文化交流</span><span class='kw-tag'>山西古建</span><span class='kw-tag'>艺术采风</span><span class='kw-tag'>友好省州</span><span class='kw-tag'>人文互鉴</span><span class='kw-tag'>文化遗产</span><span class='kw-tag'>公共外交</span>
+                        <a class="card-link" href="https://www.news.cn/20260629/6e77676e1dc640a78b8167006def7680/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-07-01</span>
+                    </div>
+                    <h4 class="card-title">受爱泼斯坦案影响 巴菲特首次“断供”盖茨基金会（资讯参考）</h4>
+                    <div class="card-core">据新华社援引外媒报道，美国知名投资人沃伦·巴菲特20年来首次暂缓向比尔及梅琳达·盖茨基金会进行年度捐赠，等待该基金会与爱泼斯坦案关联的审查结果。巴菲特自2006年起累计捐赠约480亿美元股票，2021年辞去受托人职务，2024年表示身故后不再捐赠。盖茨基金会已委托律所进行专项审查，预计今夏公布结果。该事件反映私人慈善基金会的治理风险与公众信任危机。</div>
+                    <blockquote class="card-insight">私人慈善基金会正面临从“信任驱动”向“合规驱动”的转型压力，捐赠者与基金会之间的契约关系将更依赖独立审查与信息披露。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>慈善基金会</span><span class='kw-tag'>捐赠暂停</span><span class='kw-tag'>治理风险</span><span class='kw-tag'>透明度</span><span class='kw-tag'>公众信任</span><span class='kw-tag'>爱泼斯坦案</span><span class='kw-tag'>合规审查</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260701/216be0440512446b8eb30fd94263b25d/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-07-01</span>
+                    </div>
+                    <h4 class="card-title">多国政党政要各界人士祝贺中国共产党成立105周年（资讯参考）</h4>
+                    <div class="card-core">2026年7月1日，外交部发言人郭嘉昆在例行记者会上表示，多国政党政要和各界人士以各种方式祝贺中国共产党成立105周年，高度评价党以人民为中心、实干兴邦、自我完善，领导中国取得经济社会发展成就，并为世界和平与发展作出贡献。该新闻为外交动态，无具体政策举措或量化目标。</div>
+                    <blockquote class="card-insight">该新闻为外交礼节性表态，不涉及具体政策调整或改革信号，属于常规政治宣传与外交互动。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>中国共产党成立105周年</span><span class='kw-tag'>多国政党政要</span><span class='kw-tag'>祝贺</span><span class='kw-tag'>以人民为中心</span><span class='kw-tag'>实干兴邦</span><span class='kw-tag'>自我完善</span><span class='kw-tag'>经济社会发展</span><span class='kw-tag'>世界和平</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260701/e6c5249aae3e482f9bab261ab9b9f11b/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-07-01</span>
+                    </div>
+                    <h4 class="card-title">委内瑞拉地震死亡人数升至1943人（资讯参考）</h4>
+                    <div class="card-core">委内瑞拉全国代表大会主席罗德里格斯通报，两次强震已致1943人死亡、10571人受伤，28380人接受救治。全国855栋建筑受损，其中189栋完全坍塌。拉瓜伊拉州电力供应基本恢复。救援行动已救出6461人，参与救灾包括3660名外国救援人员、51个国际代表团、148只搜救犬，接收逾70万吨人道主义援助物资。</div>
+                    <blockquote class="card-insight">此次灾害凸显发展中国家在巨灾面前的系统性脆弱性，国际人道主义援助的规模与效率成为灾后治理的关键变量。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>委内瑞拉</span><span class='kw-tag'>地震</span><span class='kw-tag'>死亡人数</span><span class='kw-tag'>救援</span><span class='kw-tag'>人道主义援助</span><span class='kw-tag'>建筑损毁</span><span class='kw-tag'>应急响应</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260701/7cb63437f9874e729e1ddff5c42c67d4/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-07-01</span>
+                    </div>
+                    <h4 class="card-title">伊朗官员称美国干涉地区事务的时代已结束（资讯参考）</h4>
+                    <div class="card-core">伊朗议会国家安全和外交政策委员会主席阿齐兹表示，美国干涉地区事务的时代已结束，强调伊朗掌握霍尔木兹海峡管理权，并主张黎巴嫩主权应通过结束以色列占领实现，而非解除抵抗力量武装。该表态反映伊朗对地区安全格局的立场，但缺乏具体政策举措或量化目标，属于外交表态性新闻。</div>
+                    <blockquote class="card-insight">该表态为伊朗外交常规立场重申，未释放新政策信号，对公共管理研究参考价值较低。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>伊朗</span><span class='kw-tag'>美国</span><span class='kw-tag'>地区事务</span><span class='kw-tag'>霍尔木兹海峡</span><span class='kw-tag'>黎巴嫩主权</span><span class='kw-tag'>抵抗力量</span><span class='kw-tag'>中东安全</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260701/66c7cfae80cf40618b00f84e2bc79ad4/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">委内瑞拉地震死亡人数升至1719人（资讯参考）</h4>
+                    <div class="card-core">委内瑞拉全国代表大会主席通报，该国两次强震已致1719人死亡、5034人受伤，22619人接受救治。855栋建筑受损（189栋完全坍塌、666栋部分坍塌）。拉瓜伊拉州约90%电力恢复，建成15个大型临时避难所。3319名外国救援人员、140只搜救犬参与救灾。该事件为国际灾害动态，非中国国内政策，仅作资讯参考。</div>
+                    <blockquote class="card-insight">该事件凸显发展中国家在巨灾面前的基础设施脆弱性，中国应强化“韧性城市”建设与区域协同救援预案。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>委内瑞拉</span><span class='kw-tag'>地震</span><span class='kw-tag'>死亡人数</span><span class='kw-tag'>建筑受损</span><span class='kw-tag'>国际救援</span><span class='kw-tag'>应急管理</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260630/f39e6dfa720d4a44890ebf9461164048/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article>                <article class="card" style="--color:#7f8c8d">
+                    <div class="card-meta">
+                        <span class="src-badge" style="background:#7f8c8d15;color:#7f8c8d">新华网-国际</span>
+                        <span class="star full">&#9733;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                        <span class="pub-date">2026-06-30</span>
+                    </div>
+                    <h4 class="card-title">古巴救援人员抵达委内瑞拉震灾区（国际动态）</h4>
+                    <div class="card-core">2026年6月29日，古巴国家主席迪亚斯-卡内尔宣布，在委内瑞拉6月24日发生两次7级以上强震后，古巴在委医疗合作人员已第一时间投入救治，后续救援人员已抵达协助搜救。截至29日，强震已致1719人遇难。古巴外长罗德里格斯表示救援队将支持医疗队工作。该事件为国际人道主义救援动态，不涉及国内公共管理政策。</div>
+                    <blockquote class="card-insight">该新闻为国际救援合作动态，不反映国内公共管理政策趋势。</blockquote>
+                    <div class="card-bottom">
+                        <span class='kw-tag'>古巴</span><span class='kw-tag'>委内瑞拉</span><span class='kw-tag'>地震</span><span class='kw-tag'>救援</span><span class='kw-tag'>国际援助</span>
+                        <a class="card-link" href="https://www.news.cn/world/20260630/9aa228ca427246f0ab0e06526d047c37/c.html" target="_blank">查看原文 &rarr;</a>
+                    </div>
+                </article></div>
+            </div>
+
+    <footer class="footer">
+        PAIA &middot; Public Admin Intelligence Assistant &middot; Generated at 2026-07-01 21:08 &middot; Powered by DeepSeek
+    </footer>
+
+</div>
+<script>function switchTab(panelId, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(panelId).classList.add('active');
+    btn.classList.add('active');
+}
+</script>
+</body>
+</html>
