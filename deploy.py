@@ -39,11 +39,14 @@ def deploy():
     r = HTMLReporter()
     report_path = r.generate(digest, entries_with_ai)
 
-    # 3. 复制报告为 index.html（GitHub Pages 默认页）
-    index_path = os.path.join("output", "index.html")
-    import shutil
-    shutil.copy(report_path, index_path)
-    print(f"[3] 已复制为 output/index.html")
+    # 3. 复制报告到 docs（GitHub Pages）
+    import shutil, os
+    docs_dir = os.path.join(os.path.dirname(__file__), "docs")
+    os.makedirs(docs_dir, exist_ok=True)
+    shutil.copy(report_path, os.path.join(docs_dir, "index.html"))
+    date_file = os.path.basename(report_path)
+    shutil.copy(report_path, os.path.join(docs_dir, date_file))
+    print(f"  docs: index.html + {date_file}")
 
     # 4. Git 提交推送
     print("[4] Git 提交...")
