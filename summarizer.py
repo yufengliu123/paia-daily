@@ -76,7 +76,7 @@ class DeepSeekSummarizer:
             )
             return entry
 
-    def batch_summarize(self, entries: list[dict], max_items: int = 180) -> list[dict]:
+    def batch_summarize(self, entries: list[dict], max_items: int = 250) -> list[dict]:
         """批量摘要，并行调用 DeepSeek API 提速。
         将摘要写回原 entries，返回完整列表不截断。"""
         from concurrent.futures import ThreadPoolExecutor, as_completed

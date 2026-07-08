@@ -171,80 +171,61 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self._json({"ok": False, "answer": f"Error: {e}"})
 
     def _trends(self):
-        """词频趋势分析 + 日环比检测"""
-        cache_path = os.path.join(CACHE_DIR, "latest_entries.json")
-        if not os.path.exists(cache_path):
-            return {"trends": [], "hot": [], "alerts": []}
-        try:
-            with open(cache_path, "r", encoding="utf-8") as f:
-                entries = json.load(f)
-        except:
-            return {"trends": [], "hot": [], "alerts": []}
+        return _trends_raw()
 
-        from collections import defaultdict
-        daily_kw = defaultdict(Counter)
-        for e in entries:
-            pub = (e.get("published","") or e.get("fetched_at",""))[:10]
-            for line in e.get("ai_summary","").split("\n"):
-                if line.strip().startswith("【关键词】"):
-                    for w in line[5:].replace("，",",").replace("、",",").split(","):
-                        w = w.strip()
-                        if len(w) >= 2:
-                            daily_kw[pub][w] += 1
 
-        # 按日期排序
-        dates = sorted(daily_kw.keys())
-        all_kw = Counter()
-        for c in daily_kw.values():
-            all_kw.update(c)
+def _trends_raw():
+    """独立趋势分析函数，可被 deploy.py 调用"""
+    from collections import defaultdict
+    cache_path = os.path.join(CACHE_DIR, "latest_entries.json")
+    if not os.path.exists(cache_path):
+        return {"trends": [], "alerts": [], "causal": []}
+    try:
+        with open(cache_path, "r", encoding="utf-8") as f:
+            entries = json.load(f)
+    except:
+        return {"trends": [], "alerts": [], "causal": []}
 
-        # 日环比：今天 vs 昨天
-        today_kw = daily_kw.get(dates[-1], Counter()) if dates else Counter()
-        yesterday_kw = daily_kw.get(dates[-2], Counter()) if len(dates) >= 2 else Counter()
+    daily_kw = defaultdict(Counter)
+    for e in entries:
+        pub = (e.get("published","") or e.get("fetched_at",""))[:10]
+        for line in e.get("ai_summary","").split("\n"):
+            if line.strip().startswith("【关键词】"):
+                for w in line[5:].replace("，",",").replace("、",",").split(","):
+                    w = w.strip()
+                    if len(w) >= 2:
+                        daily_kw[pub][w] += 1
 
-        max_c = max(all_kw.values()) if all_kw else 1
-        trends = []
-        alerts = []
+    dates = sorted(daily_kw.keys())
+    all_kw = Counter()
+    for c in daily_kw.values():
+        all_kw.update(c)
 
-        for w, c in all_kw.most_common(15):
-            today_c = today_kw.get(w, 0)
-            yesterday_c = yesterday_kw.get(w, 0)
-            delta = today_c - yesterday_c
+    today_kw = daily_kw.get(dates[-1], Counter()) if dates else Counter()
+    yesterday_kw = daily_kw.get(dates[-2], Counter()) if len(dates) >= 2 else Counter()
 
-            if delta > 2:
-                trend = "up"
-                alerts.append(f"{w} 关注度骤升 +{delta}")
-            elif delta < -1:
-                trend = "down"
-            else:
-                trend = "stable"
+    max_c = max(all_kw.values()) if all_kw else 1
+    trends = []
+    alerts = []
 
-            trends.append({
-                "word": w, "count": c, "trend": trend, "delta": delta,
-                "bar_pct": round(c / max_c * 100, 1)
-            })
+    for w, c in all_kw.most_common(15):
+        delta = today_kw.get(w, 0) - yesterday_kw.get(w, 0)
+        trend = "up" if delta > 2 else ("down" if delta < -1 else "stable")
+        if delta > 2:
+            alerts.append(f"{w} 关注度骤升 +{delta}")
+        trends.append({"word": w, "count": c, "trend": trend, "delta": delta,
+                        "bar_pct": round(c / max_c * 100, 1)})
 
-        # 只看前3个上升最快的
-        alerts = alerts[:3]
+    causal = []
+    rules = [(["高温", "用电"], "能源保供压力"), (["出口", "关税", "贸易"], "产业链转移风险"),
+             (["就业", "失业", "稳岗"], "社会稳定压力"), (["暴雨", "防汛", "降雨"], "农业受灾风险"),
+             (["债务", "地方", "财政"], "财政可持续风险"), (["AI", "人工智能", "数字"], "技术治理挑战")]
+    for kws, risk in rules:
+        score = sum(all_kw.get(kw, 0) for kw in kws)
+        if score >= 3:
+            causal.append({"trigger": "+".join(kws[:2]), "risk": risk})
 
-        # 因果链：同现关键词触发风险提示
-        causal = []
-        rules = [
-            (["高温", "用电"], "能源保供压力"),
-            (["出口", "关税", "贸易"], "产业链转移风险"),
-            (["就业", "失业", "稳岗"], "社会稳定压力"),
-            (["暴雨", "防汛", "降雨"], "农业受灾风险"),
-            (["债务", "地方", "财政"], "财政可持续风险"),
-            (["PMI", "制造业"], "经济复苏力度"),
-            (["AI", "人工智能", "数字"], "技术治理挑战"),
-        ]
-        for kws, risk in rules:
-            score = sum(all_kw.get(kw, 0) for kw in kws)
-            if score >= 3:
-                causal.append({"trigger": "+".join(kws[:2]), "risk": risk})
-
-        return {"trends": trends, "alerts": alerts, "causal": causal[:3],
-                "date_range": f"{dates[0]} ~ {dates[-1]}" if len(dates) >= 2 else "today"}
+    return {"trends": trends, "alerts": alerts[:3], "causal": causal[:3]}
 
     def _serve(self):
         today = datetime.now().strftime("%Y-%m-%d")
